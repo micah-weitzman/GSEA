@@ -57,7 +57,7 @@ ggGSEA_Ks <- function(resDF, gCol, vCol, geneSet)
   ed <- ecdf(tmpDF$value)
   maxdiffidx <<- which.max(abs(ed(tmpDF$value)-pnorm(tmpDF$value)))
   maxdiffat <- tmpDF$value[maxdiffidx]
-  ggplot(tmpDF, aes(value)) + stat_ecdf(colour="red") + stat_function(fun = pnorm, colour = "black") + ggtitle("KS Plot") + geom_vline(x=maxdiffat, lty=2) + theme_bw() + annotate("text", label=paste("Max Diff:",maxdiffidx), x=2, y=.123, size=6, family="Helvetica")+ylab()
+  ggplot(tmpDF, aes(value)) + stat_ecdf(colour="red") + stat_function(fun = pnorm, colour = "black") + ggtitle("KS Plot") + geom_vline(x=maxdiffat, lty=2) + theme_bw() + annotate("text", label=paste("Max Diff:",maxdiffidx), x=2, y=.123, size=6, family="Helvetica")
 }
 
 
