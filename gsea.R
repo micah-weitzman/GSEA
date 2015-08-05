@@ -9,10 +9,6 @@
 library(ggplot2)
 library(gridExtra)
 
-# Import ES test algorithm 
-source("es.R")
-
-
 # 1) First we can do a bar plot with genes in the set colored
 ggGSEA_Bar <- function(resDF, gCol, vCol, geneSet)
 {
