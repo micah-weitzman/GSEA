@@ -12,15 +12,15 @@ library(gridExtra)
 # 1) First we can do a bar plot with genes in the set colored
 ggGSEA_Bar <- function(resDF, gCol, vCol, geneSet)
 {
-  tmpDF <- resDF[,c(gCol, vCol)];
-  rownames(tmpDF) <- resDF[,1];
+  tmpDF <- resDF[,c(gCol, vCol)]
+  rownames(tmpDF) <- resDF[,1]
   tmpVCol <- tmpDF[,vCol]
-  tmpDF <- tmpDF[order(tmpVCol),];
-  xMax <- max(tmpVCol);
-  xMin <- min(tmpVCol);
-  tmpDF <- tmpDF[tmpDF[,gCol]%in%geneSet,];
-  colnames(tmpDF)[1:2] <- c("Gene", "Value");
-  qplot(0,0)+geom_point(colour="white")+geom_vline(xintercept=tmpDF[,"Value"], colour="red", alpha = .3, size = 1.5)+theme_bw()+scale_x_continuous(limits = c(xMin, xMax))+xlab("Distribution")+ylab("")+theme(axis.ticks.y=element_blank(), axis.text.y=element_blank(), panel.background=element_blank(),panel.grid.major=element_blank())+ggtitle("Bar Plot")
+  tmpDF <- tmpDF[order(tmpVCol),]
+  xMax <- max(tmpVCol)
+  xMin <- min(tmpVCol)
+  tmpDF <- tmpDF[tmpDF[,gCol]%in%geneSet,]
+  colnames(tmpDF)[1:2] <- c("Gene", "Value") 
+  qplot(0,0)+geom_point(colour="white")+geom_vline(xintercept=tmpDF[,"Value"], colour="red", alpha = .3, size = .5)+theme_bw()+scale_x_continuous(limits = c(xMin, xMax))+xlab("Distribution")+ylab("")+theme(axis.ticks.y=element_blank(), axis.text.y=element_blank(), panel.background=element_blank(),panel.grid.major=element_blank())+ggtitle("Bar Plot")
 }
 
 
@@ -57,7 +57,7 @@ ggGSEA_Ks <- function(resDF, gCol, vCol, geneSet)
   ed <- ecdf(tmpDF$value)
   maxdiffidx <<- which.max(abs(ed(tmpDF$value)-pnorm(tmpDF$value)))
   maxdiffat <- tmpDF$value[maxdiffidx]
-  ggplot(tmpDF, aes(value)) + stat_ecdf(colour="red") + stat_function(fun = pnorm, colour = "black") + ggtitle("KS Plot") + geom_vline(x=maxdiffat, lty=2) + theme_bw() + annotate("text", label=paste("Max Diff:",maxdiffidx), x=2, y=.123, size=6, family="Helvetica")+ylab("")
+  ggplot(tmpDF, aes(value)) + stat_ecdf(colour="red") + stat_function(fun = pnorm, colour = "black") + ggtitle("KS Plot") + geom_vline(x=maxdiffat, lty=2) + theme_bw() + annotate("text", label=paste("Max Diff:",maxdiffidx), x=0, y=0, size=6, family="Helvetica")+ylab("")
 }
 
 
@@ -73,7 +73,6 @@ ggGSEA_Comb <-
   a$widths <- b$widths
   grid.arrange(arrangeGrob(a,c,b,d, ncol=2, nrow=2, top = paste("GSEA Visualization"), bottom=paste("Red = Gene Set \n Grey = Gene List \n KS test:",kst), right=paste()))
 }
-
 #create fake data and try it
 
 #10000 genes
