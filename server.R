@@ -11,7 +11,7 @@ shinyServer(function(input, output){
     read.delim(inFile$datapath, col.names=c("gene", "value")) 
   })
   
-  # generate practive gene set 
+  # generate reactive gene set 
   geneSet <- reactive({
     unlist(strsplit(input$gSet, ","))
   })
