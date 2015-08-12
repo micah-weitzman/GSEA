@@ -13,11 +13,13 @@ shinyUI(fluidPage(
                         '.csv')),
       textInput("gSet", label="Gene Set", value="Enter,genes,seperated,by,commas"),
       p("Genes used: ", textOutput("num_used", inline=TRUE)),
+      helpText('Upload a CSV file seperated by tabs, contains a header, and " " around the genes'),
       tags$hr(),
       h2("Results"),
       h4("P-Value: ", textOutput("kstp")),
-      h4("KS Stat: ", textOutput("kst"))
-      
+      h4("KS Stat: ", textOutput("kst")),
+      tags$hr(),
+      downloadButton('downloadData', 'Download Sample Data')
     ),
     
     mainPanel(tabsetPanel(type = "tabs", 

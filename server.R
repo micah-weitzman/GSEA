@@ -65,4 +65,14 @@ shinyServer(function(input, output){
     length(geneSet())
   })
   
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste("sampledata", "csv", sep = ".")
+    },
+    content = function(file) {
+      write.table(read.delim("sampledata.txt"), file, sep = "\t",
+                  row.names = FALSE)
+    }
+  )
+  
 })
