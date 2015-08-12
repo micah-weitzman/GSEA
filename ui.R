@@ -12,6 +12,7 @@ shinyUI(fluidPage(
                         'text/comma-separated-values,text/plain', 
                         '.csv')),
       textInput("gSet", label="Gene Set", value="Enter,genes,seperated,by,commas"),
+      p("Genes used: ", textOutput("num_used", inline=TRUE)),
       tags$hr(),
       h2("Results"),
       h4("P-Value: ", textOutput("kstp")),

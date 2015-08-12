@@ -13,8 +13,13 @@ shinyServer(function(input, output){
   
   # generate reactive gene set 
   geneSet <- reactive({
-    unlist(strsplit(input$gSet, ","))
+    if (is.null(input$file1)) { return(NULL) }
+    intersect(unlist(strsplit(input$gSet, ",")), read.delim(input$file1$datapath)[,1] )
   })
+  
+  ################
+  # Render Plots #
+  ################
   
    # render bar plot
   output$barPlot <- renderPlot({
@@ -40,15 +45,24 @@ shinyServer(function(input, output){
     print(ggGSEA_Ks(Data(), "gene", "value", geneSet()))
   })
   
+  #######################
+  # Variables to Output #
+  #######################
+  
   # ks test p-value value of data
   output$kstp <- renderText({
-    if (is.null(input$gSet) | is.null(input$file1)) { return() }
+    if (is.null(input$file1)) { return(NULL) }
     ks.test(Data()[Data()[,"gene"]%in%geneSet(),"value"], Data()[!Data()[,"gene"]%in%geneSet(),"value"])$p.value
   })
   # ks statistic of data
   output$kst <- renderText({
-    if (is.null(input$gSet) | is.null(input$file1) ) { return() }
+    if (is.null(input$file1)) { return(NULL) }
     ks.test(Data()[Data()[,"gene"]%in%geneSet(),"value"], Data()[!Data()[,"gene"]%in%geneSet(),"value"])$statistic
+  })
+  # get number of elements from input that were used
+  output$num_used <- renderText({
+    if (length(geneSet())==0 | is.null(input$file1)) { return(NULL) }
+    length(geneSet())
   })
   
 })
