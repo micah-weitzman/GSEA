@@ -70,7 +70,7 @@ shinyServer(function(input, output){
       paste("sampledata", "csv", sep = ".")
     },
     content = function(file) {
-      write.table(read.delim("sampledata.txt"), file, sep = "\t",
+      write.table(read.delim("sampleData.txt"), file, sep = "\t",
                   row.names = FALSE)
     }
   )
