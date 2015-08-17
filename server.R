@@ -14,7 +14,7 @@ shinyServer(function(input, output){
   # generate reactive gene set 
   geneSet <- reactive({
     if (is.null(input$file1)) { return(NULL) }
-    intersect(unlist(strsplit(input$gSet, ",")), read.delim(input$file1$datapath)[,1] )
+    intersect(unlist(strsplit(gsub(" ", "",input$gSet), ",")), read.delim(input$file1$datapath)[,1] )
   })
   
   ################
