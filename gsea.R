@@ -1,5 +1,5 @@
 ####################################
-#Code to visualize GSEA results
+# Code to visualize GSEA results
 #
 # Micah Weitzman
 #
